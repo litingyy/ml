@@ -32,7 +32,7 @@ def fit_svm(train_data, test_data, train_label, test_label, model_path):
     test_data = test_data[:, 1:]
     # print(train_data.shape)
     # 3.训练svm分类器
-    classifier = svm.SVC(C=1, kernel='rbf', gamma=8, decision_function_shape='ovo')  # rbf:高斯核函数
+    classifier = svm.SVC(C=2, kernel='rbf', gamma=8, decision_function_shape='ovo')  # rbf:高斯核函数
     classifier.fit(train_data, train_label.ravel())  # ravel函数在降维时默认是行序优先
 
     # 3.1模型保存与加载
@@ -65,7 +65,7 @@ def write_predict(x_pred, real, pred, output_path):
          'bg_color': '#FFD1A4'})
     col = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1']
     # 　　设置自己想要的标题
-    title = ['djxh', 'nsrzt_bz', 'zlxqwgz_bz', 'tfrztfzc_bz', 'lx3ywsb_bz', 'sfz_bz', "pred"]
+    title = ['djxh', 'zlxqwgz_bz', 'tfrztfzc_bz', 'lx3ywsb_bz', 'sfz_bz', 'nsrzt_bz', "pred"]
     worksheet.write_row(col[0], title, format4)  # 设置AF-AI列的样式
     for i in range(len(pred)):
         for j in range(len(x_pred[0])):
@@ -79,9 +79,9 @@ def write_predict(x_pred, real, pred, output_path):
 # main入口
 
 if __name__ == '__main__':
-    input_path = '/Users/liting/Documents/python/Moudle/svm/formatData.txt'
-    output_path = '/Users/liting/Documents/python/Moudle/svm/Results.xlsx'
-    model_path = '/Users/liting/Documents/python/Moudle/svm/train1_model.m'
+    input_path = '/Users/liting/Documents/python/Moudle/ml/svm/formatData.txt'
+    output_path = '/Users/liting/Documents/python/Moudle/ml/svm/Results.xlsx'
+    model_path = '/Users/liting/Documents/python/Moudle/ml/svm/train1_model.m'
     train_data, test_data, train_label, test_label = data_deal(input_path)
     tra_label, tes_label = fit_svm(train_data, test_data, train_label, test_label, model_path)
     write_predict(test_data, test_label, tes_label, output_path)
